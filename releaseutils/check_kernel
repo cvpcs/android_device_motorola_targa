@@ -1,0 +1,11 @@
+#!/sbin/sh
+
+G_KERNEL_VER="Linux localhost 2.6.35.7-g790a33c #1 SMP PREEMPT Mon Aug 15 00:07:09 CDT 2011 armv7l GNU/Linux"
+
+DET_KERNEL_VER="$(uname -a)"
+
+if [ "${DET_KERNEL_VER}" == "${G_KERNEL_VER}" ] ; then
+    exit 0
+else
+    exit 1
+fi
