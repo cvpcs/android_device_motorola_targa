@@ -75,15 +75,15 @@ BOARD_EGL_CFG := device/motorola/targa/egl.cfg
 #BOARD_VOLD_MAX_PARTITIONS :=
 #BOARD_VOLD_EMMC_SHARES_DEV_MAJOR :=
 
-BOARD_BOOTIMAGE_PARTITION_SIZE := 0x003fffff
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x004fffff
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 0x0cdfffff   # limited so we enforce room to grow
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x105c0000
+#BOARD_BOOTIMAGE_PARTITION_SIZE := 0x003fffff
+#BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x004fffff
+#BOARD_SYSTEMIMAGE_PARTITION_SIZE := 0x0cdfffff   # limited so we enforce room to grow
+#BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x105c0000
 BOARD_FLASH_BLOCK_SIZE := 131072
 
-#TARGET_RECOVERY_UI_LIB := librecovery_ui_targa librecovery_ui_generic
-
-#TARGET_RECOVERY_UPDATER_LIBS += librecovery_updater_generic
+# some stuff for recovery
+BOARD_CUSTOM_GRAPHICS := ../../../device/motorola/targa/recovery/graphics.c
+BOARD_HAS_NO_SELECT_BUTTON := true
 
 TARGET_PREBUILT_KERNEL := device/motorola/targa/kernel
 
