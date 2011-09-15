@@ -32,7 +32,86 @@ PRODUCT_COPY_FILES += \
 $(call inherit-product-if-exists, vendor/motorola/targa/targa-vendor.mk)
 
 ## (3)  Finally, the least specific parts, i.e. the non-CDMA-specific aspects
-#PRODUCT_PROPERTY_OVERRIDES +=
+PRODUCT_PROPERTY_OVERRIDES +=
+    ro.com.google.clientidbase.ms=android-verizon \
+    ro.com.google.clientidbase.am=android-verizon \
+    ro.com.google.clientidbase.gmm=android-motorola \
+    ro.com.google.clientidbase.yt=android-verizon \
+    ro.kernel.android.ril=yes \
+    persist.ril.mux.noofchannels=10 \
+    persist.ril.mux.ttydevice=/dev/ttyO0 \
+    persist.ril.modem.ttydevice=/dev/ttyUSB4 \
+    persist.ril.tcmd.ttydevice=/dev/usb/tty2-1:1.3 \
+    persist.ril.features=0x90A \
+    persist.ril.mux.retries=500 \
+    persist.ril.mux.sleep=2 \
+    rild.libpath=/system/lib/moto-ril-multimode.so \
+    ro.default_usb_mode=0 \
+    ro.media.enc.aud.fileformat=qcp \
+    ro.media.enc.aud.codec=qcelp \
+    ro.media.enc.aud.bps=13300 \
+    ro.media.enc.aud.ch=1 \
+    ro.media.enc.aud.hz=8000 \
+    ro.com.google.gmsversion=2.3_r6 \
+    ro.mot.phonemode.vzw4gphone=1 \
+    ro.mot.lte_on_cdma=1 \
+    lte_ril.libpath=/system/lib/lib-mot-lte-ril.so \
+    cdma_ril.libpath=/system/lib/libmoto_ril.so \
+    ril.rat=LTE \
+    lte_ril.netcfg_to=90 \
+    ro.mot.tmp.telephony.refactor=true \
+    ro.cdma.subscription=0 \
+    ro.telephony.call_ring.multiple=false \
+    ro.telephony.call_ring.delay=3000 \
+    ro.setupwizard.enable_bypass=1 \
+    ro.cdma.homesystem=64,65,76,77,78,79,80,81,82,83 \
+    ro.cdma.data_retry_config=default_randomization=2000,max_retries=infinite,0,0,120000,180000,540000,960000 \
+    ro.gsm.data_retry_config=default_randomization=2000,max_retries=infinite,0,0,80000,125000,485000,905000 \
+    ro.gsm.2nd_data_retry_config=max_retries=1,15000 \
+    ro.media.camcorder.1080p=mp4,h264,30,15000000,aac,128000,44100,2 \
+    ro.media.camcorder.720p=mp4,h264,30,10000000,aac,128000,44100,2 \
+    ro.media.camcorder.d1NTSC=mp4,h264,30,6000000,aac,128000,44100,2 \
+    ro.media.camcorder.vga=mp4,h264,30,4000000,aac,128000,44100,2 \
+    ro.media.camcorder.cif=mp4,h264,30,1500000,aac,128000,44100,2 \
+    ro.media.camcorder.qvga=mp4,h264,15,500000,aac,64000,44100,2 \
+    ro.media.camcorder.mms=3gp,h264,15,128000,amrnb,12200,8000,1 \
+    ro.media.camcorder.mmsres=qvga \
+    ro.camcorder.zoom=true \
+    ro.media.capture.maxres=8m \
+    ro.media.capture.fast.fps=4 \
+    ro.media.capture.slow.fps=120 \
+    ro.media.capture.flash=led \
+    ro.media.capture.flashMinV=3300000 \
+    ro.media.capture.torchIntensity=40 \
+    ro.media.capture.flashIntensity=70 \
+    ro.media.panorama.defres=3264x1840 \
+    ro.media.panorama.frameres=1280x720 \
+    ro.camcorder.videoModes=false \
+    media.stagefright.enable-player=true \
+    media.stagefright.enable-meta=true \
+    media.stagefright.enable-scan=false \
+    media.stagefright.enable-http=true \
+    media.stagefright.enable-record=false \
+    ro.media.camera.focal=3451.0,3451.0 \
+    ro.media.camera.principal=1632.0,1224.0 \
+    ro.media.camera.skew=0.0 \
+    ro.media.camera.distortion=0.0,0.0,0.0,0.0,0.0 \
+    ro.media.camera.calresolution=3264,2448 \
+    ro.mot.setuptype=2 \
+    ro.HorizontalBUA=true \
+    ro.HorizontalVVM=true \
+    ro.horizontalIM=true \
+    ro.horizontalNGM=false \
+    ro.horizontalVMM=false \
+    ro.horizontalMOD=false \
+    ro.horizontalVOD=false \
+    ro.horizontalEmail=false \
+    ro.mot.internalsdcard=1 \
+    ro.mot.dpmext=true \
+    ro.com.google.clientid=android-motorola \
+    ro.mot.hw.uaprof=http://uaprof.motorola.com/phoneconfig/MotoMB200/profile/MotoMB200.rdf \
+    ro.build.version.full=Blur_Version.5.5.886.XT875.Verizon.en.US \
+    ro.mot.hidden_keyboards=evfwd
 
 DEVICE_PACKAGE_OVERLAYS += device/motorola/targa/overlay
 
@@ -55,31 +134,42 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/motorola/targa/media_profiles.xml:system/etc/media_profiles.xml
 
-#PRODUCT_PACKAGES += \
-#    librs_jni \
-#    tiwlan.ini \
+PRODUCT_PACKAGES += \
+    librs_jni \
+    libOMX_Core \
+    libVendor_ti_omx \
+    libVendor_ti_omx_config_parser \
+    libreference-ril \
+    libreference-cdma-sms \
+    Usb
 #    dspexec \
 #    libbridge \
-#    overlay.omap4 \
-#    wlan_cu \
-#    libtiOsLib \
-#    wlan_loader \
-#    libCustomWifi \
-#    wpa_supplicant.conf \
-#    dhcpcd.conf \
-#    libOMX.TI.AAC.encode \
-#    libOMX.TI.AMR.encode \
-#    libOMX.TI.WBAMR.encode \
-#    libOMX.TI.JPEG.Encoder \
 #    libLCML \
-#    libOMX_Core \
-#    libOMX.TI.Video.Decoder \
-#    libOMX.TI.Video.encoder \
-#    libVendor_ti_omx \
+
+# wifi stuff
+PRODUCT_PACKAGES += \
+    tiwlan.ini \
+    wlan_cu \
+    wlan_loader \
+    wpa_supplicant.conf \
+    dhcpcd.conf
+#    libtiOsLib \
+#    libCustomWifi \
+
+
+# hw libs
+PRODUCT_PACKAGES += \
+    alsa.default \
+    acoustics.default \
+    overlay.omap4
 #    sensors.targa \
 #    lights.targa \
-#    libaudiopolicy \
-#    Usb
+
+
+# omap4 stuff
+#PRODUCT_PACKAGES += \
+#    syslink_daemon.out
+
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
