@@ -1,37 +1,19 @@
 #
-# Copyright (C) 2009 The Android Open Source Project
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+# This is the product configuration for a generic targa,
 #
 
-#
-# This is the product configuration for a generic CDMA targa,
-# not specialized for any geography.
-#
-
-# The gps config appropriate for this device
+# GPS
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
 
-## (1) First, the most specific values, i.e. the aspects that are specific to CDMA
-
+# Rootfs stuff
 PRODUCT_COPY_FILES += \
     device/motorola/targa/init.mapphone_cdma.rc:root/init.mapphone_cdma.rc \
     device/motorola/targa/ueventd.mapphone_cdma.rc:root/ueventd.mapphone_cdma.rc
 
-## (2) Also get non-open-source CDMA-specific aspects if available
+# Vendor-specifics
 $(call inherit-product-if-exists, vendor/motorola/targa/targa-vendor.mk)
 
-## (3)  Finally, the least specific parts, i.e. the non-CDMA-specific aspects
+# Prop overrides
 PRODUCT_PROPERTY_OVERRIDES +=
     ro.com.google.clientidbase.ms=android-verizon \
     ro.com.google.clientidbase.am=android-verizon \
@@ -113,8 +95,10 @@ PRODUCT_PROPERTY_OVERRIDES +=
     ro.build.version.full=Blur_Version.5.5.886.XT875.Verizon.en.US \
     ro.mot.hidden_keyboards=evfwd
 
+# Device overlay
 DEVICE_PACKAGE_OVERLAYS += device/motorola/targa/overlay
 
+# Permissions files
 PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
     frameworks/base/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
@@ -130,46 +114,100 @@ PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
     frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml
 
-# media config xml file
+# Configs
 PRODUCT_COPY_FILES += \
-    device/motorola/targa/media_profiles.xml:system/etc/media_profiles.xml
+    device/motorola/targa/configs/TICameraCameraProperties.xml:system/etc/TICameraCameraProperties.xml
+    device/motorola/targa/configs/media_profiles.xml:system/etc/media_profiles.xml
 
-PRODUCT_PACKAGES += \
-    librs_jni \
-    libOMX_Core \
-    libVendor_ti_omx \
-    libVendor_ti_omx_config_parser \
-    libreference-ril \
-    libreference-cdma-sms \
-    Usb
-#    dspexec \
-#    libbridge \
-#    libLCML \
-
-# wifi stuff
-PRODUCT_PACKAGES += \
-    tiwlan.ini \
-    wlan_cu \
-    wlan_loader \
-    wpa_supplicant.conf \
-    dhcpcd.conf
-    libtiOsLib \
-    libCustomWifi \
-
-
-# hw libs
+# HW Libs
 PRODUCT_PACKAGES += \
     alsa.default \
+    alsa.omap4 \
     acoustics.default \
     overlay.omap4
 #    sensors.targa \
 #    lights.targa \
 
+# OMX
+PRODUCT_PACKAGES += \
+    OMXCore \
+    libomxcameraadapter \
+    libOMX_CoreOsal \
+    libOMX_Core \
+    libomx_proxy_common \
+    libomx_rpc \
+    libOMX.TI.DUCATI1.IMAGE.JPEGD \
+    libOMX.TI.DUCATI1.MISC.SAMPLE \
+    libOMX.TI.DUCATI1.VIDEO.CAMERA \
+    libOMX.TI.DUCATI1.VIDEO.DECODER \
+    libOMX.TI.DUCATI1.VIDEO.H264D \
+    libOMX.TI.DUCATI1.VIDEO.H264E \
+    libOMX.TI.DUCATI1.VIDEO.MPEG4D \
+    libOMX.TI.DUCATI1.VIDEO.MPEG4E \
+    libOMX.TI.DUCATI1.VIDEO.VP6D \
+    libOMX.TI.DUCATI1.VIDEO.VP7D
+#    libVendor_ti_omx \
+#    libVendor_ti_omx_config_parser
 
-# omap4 stuff
-#PRODUCT_PACKAGES += \
-#    syslink_daemon.out
+# Syslink and Tiler
+PRODUCT_PACKAGES += \
+    libcamera \
+    libd2cmap \
+    libipc \
+    libipcutils \
+    libnotify \
+    libomap_mm_library_jni \
+    librcm \
+    libsysmgr \
+    libtimemmgr \
+    libtiutils \
+    dmm_daemontest.out \
+    ducati_load.out \
+    event_listener.out \
+    gateMPApp.out \
+    heapBufMPApp.out \
+    heapMemMPApp.out \
+    interm3.out \
+    listMPApp.out \
+    memmgrserver.out \
+    messageQApp.out \
+    nameServerApp.out \
+    notifyping.out \
+    procMgrApp.out \
+    sharedRegionApp.out \
+    slpmresources.out \
+    slpmtransport.out \
+    syslink_daemon.out \
+    syslink_trace_daemon.out \
+    utilsApp.out
+# These are test.out binaries included in stock, leave out for now
+#    rcm_daemontest.out \
+#    rcm_multiclienttest.out \
+#    rcm_multitest.out \
+#    rcm_multithreadtest.out \
+#    rcm_singletest.out \
+#    slpmtest.out \
+#    syslink_tilertest.out \
 
+# Wifi
+PRODUCT_PACKAGES += \
+    libtiOsLib \
+    libCustomWifi \
+    wlan_loader \
+    wlan_cu \
+    wpa_supplicant.conf \
+    tiwlan.ini \
+    dhcpcd.conf
+
+# Misc
+PRODUCT_PACKAGES += \
+    librs_jni \
+    libreference-ril \
+    libreference-cdma-sms \
+    Usb
+
+FRAMEWORKS_BASE_SUBDIRS += \
+    $(addsuffix /java, omapmmlib)
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
@@ -179,7 +217,6 @@ PRODUCT_LOCALES += hdpi
 
 PRODUCT_COPY_FILES += \
     device/motorola/targa/vold.fstab:system/etc/vold.fstab \
-    device/motorola/targa/apns-conf.xml:system/etc/apns-conf.xml \
     device/motorola/targa/mount_ext3.sh:system/bin/mount_ext3.sh
 
 # these need to be here for the installer, just put them here for now
@@ -210,7 +247,6 @@ $(call inherit-product-if-exists, vendor/motorola/targa/targa-vendor.mk)
 $(call inherit-product, device/motorola/common/common_hijack.mk)
 
 $(call inherit-product, build/target/product/full_base.mk)
-
 
 PRODUCT_NAME := generic_targa
 PRODUCT_DEVICE := targa
