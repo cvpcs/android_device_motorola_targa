@@ -8,6 +8,6 @@
 #/boot		mtd		/dev/block/mmcblk1p15
 #/recovery	mtd		/dev/block/mmcblk1p16
 /pds		ext3		/dev/block/mmcblk1p7
-/preinstall	ext3		/dev/block/mmcblk1p23
+#/preinstall	ext3		/dev/block/mmcblk1p23
 /webtop		ext3		/dev/block/mmcblk1p24
 /emstorage	vfat		/dev/block/mmcblk1p26
