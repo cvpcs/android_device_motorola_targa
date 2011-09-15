@@ -55,10 +55,10 @@ TARGET_RECOVERY_PRE_COMMAND := "echo 1 > /data/.recovery_mode; sync;"
 TARGET_RECOVERY_PRE_COMMAND_CLEAR_REASON := true
 BOARD_ALWAYS_INSECURE := true
 BOARD_HAS_LARGE_FILESYSTEM := true
-BOARD_MKE2FS := device/motorola/targa/mke2fs
+BOARD_MKE2FS := device/motorola/targa/prebuilt/mke2fs
 
 # OpenGL
-BOARD_EGL_CFG := device/motorola/targa/configs/egl.cfg
+BOARD_EGL_CFG := device/motorola/targa/prebuilt/egl.cfg
 
 # OMX
 HARDWARE_OMX := true
@@ -91,3 +91,4 @@ TARGET_NEEDS_MOTOROLA_HIJACK := true
 # Misc
 BOARD_USE_BATTERY_CHARGE_COUNTER := true
 BOARD_FLASH_BLOCK_SIZE := 131072
+HAVE_2_3_DSP := 1

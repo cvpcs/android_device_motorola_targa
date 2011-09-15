@@ -2,19 +2,11 @@
 # This is the product configuration for a generic targa,
 #
 
-# GPS
-$(call inherit-product, device/common/gps/gps_us_supl.mk)
-
-# Rootfs stuff
-PRODUCT_COPY_FILES += \
-    device/motorola/targa/init.mapphone_cdma.rc:root/init.mapphone_cdma.rc \
-    device/motorola/targa/ueventd.mapphone_cdma.rc:root/ueventd.mapphone_cdma.rc
-
 # Vendor-specifics
 $(call inherit-product-if-exists, vendor/motorola/targa/targa-vendor.mk)
 
 # Prop overrides
-PRODUCT_PROPERTY_OVERRIDES +=
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.com.google.clientidbase.ms=android-verizon \
     ro.com.google.clientidbase.am=android-verizon \
     ro.com.google.clientidbase.gmm=android-motorola \
@@ -114,10 +106,21 @@ PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
     frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml
 
-# Configs
+# Prebuilts
 PRODUCT_COPY_FILES += \
-    device/motorola/targa/configs/TICameraCameraProperties.xml:system/etc/TICameraCameraProperties.xml
-    device/motorola/targa/configs/media_profiles.xml:system/etc/media_profiles.xml
+    device/motorola/targa/prebuilt/TICameraCameraProperties.xml:system/etc/TICameraCameraProperties.xml \
+    device/motorola/targa/prebuilt/apns-conf.xml:system/etc/apns-conf.xml \
+    device/motorola/targa/prebuilt/gps.conf:system/etc/gps.conf \
+    device/motorola/targa/prebuilt/media_profiles.xml:system/etc/media_profiles.xml \
+    device/motorola/targa/prebuilt/mount_ext3.sh:system/bin/mount_ext3.sh \
+    device/motorola/targa/prebuilt/tiwlan_ap.ini:system/etc/wifi/tiwlan_ap.ini \
+    device/motorola/targa/prebuilt/tiwlan.ini:system/etc/wifi/tiwlan.ini \
+    device/motorola/targa/prebuilt/vold.fstab:system/etc/vold.fstab
+
+# Rootfs
+PRODUCT_COPY_FILES += \
+    device/motorola/targa/root/init.mapphone_cdma.rc:root/init.mapphone_cdma.rc \
+    device/motorola/targa/root/ueventd.mapphone_cdma.rc:root/ueventd.mapphone_cdma.rc
 
 # HW Libs
 PRODUCT_PACKAGES += \
@@ -145,9 +148,9 @@ PRODUCT_PACKAGES += \
     libOMX.TI.DUCATI1.VIDEO.MPEG4D \
     libOMX.TI.DUCATI1.VIDEO.MPEG4E \
     libOMX.TI.DUCATI1.VIDEO.VP6D \
-    libOMX.TI.DUCATI1.VIDEO.VP7D
-#    libVendor_ti_omx \
-#    libVendor_ti_omx_config_parser
+    libOMX.TI.DUCATI1.VIDEO.VP7D \
+    libVendor_ti_omx \
+    libVendor_ti_omx_config_parser
 
 # Syslink and Tiler
 PRODUCT_PACKAGES += \
@@ -174,20 +177,19 @@ PRODUCT_PACKAGES += \
     nameServerApp.out \
     notifyping.out \
     procMgrApp.out \
+    rcm_daemontest.out \
+    rcm_multiclienttest.out \
+    rcm_multitest.out \
+    rcm_multithreadtest.out \
+    rcm_singletest.out \
     sharedRegionApp.out \
     slpmresources.out \
+    slpmtest.out \
     slpmtransport.out \
     syslink_daemon.out \
+    syslink_tilertest.out \
     syslink_trace_daemon.out \
     utilsApp.out
-# These are test.out binaries included in stock, leave out for now
-#    rcm_daemontest.out \
-#    rcm_multiclienttest.out \
-#    rcm_multitest.out \
-#    rcm_multithreadtest.out \
-#    rcm_singletest.out \
-#    slpmtest.out \
-#    syslink_tilertest.out \
 
 # Wifi
 PRODUCT_PACKAGES += \
@@ -196,8 +198,14 @@ PRODUCT_PACKAGES += \
     wlan_loader \
     wlan_cu \
     wpa_supplicant.conf \
-    tiwlan.ini \
     dhcpcd.conf
+
+# Release utilities
+PRODUCT_PACKAGES += \
+    targa_releaseutils-check_kernel \
+    targa_releaseutils-finalize_release \
+    targa_releaseutils-mke2fs \
+    targa_releaseutils-tune2fs \
 
 # Misc
 PRODUCT_PACKAGES += \
@@ -214,17 +222,6 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 
 # targa uses high-density artwork where available
 PRODUCT_LOCALES += hdpi
-
-PRODUCT_COPY_FILES += \
-    device/motorola/targa/vold.fstab:system/etc/vold.fstab \
-    device/motorola/targa/mount_ext3.sh:system/bin/mount_ext3.sh
-
-# these need to be here for the installer, just put them here for now
-PRODUCT_PACKAGES += \
-    targa_releaseutils-check_kernel \
-    targa_releaseutils-finalize_release \
-    targa_releaseutils-mke2fs \
-    targa_releaseutils-tune2fs \
 
 # copy all kernel modules under the "modules" directory to system/lib/modules
 PRODUCT_COPY_FILES += $(shell \
