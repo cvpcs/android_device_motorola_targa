@@ -55,7 +55,7 @@ TARGET_RECOVERY_PRE_COMMAND := "echo 1 > /data/.recovery_mode; sync;"
 TARGET_RECOVERY_PRE_COMMAND_CLEAR_REASON := true
 BOARD_ALWAYS_INSECURE := true
 BOARD_HAS_LARGE_FILESYSTEM := true
-BOARD_MKE2FS := device/motorola/targa/prebuilt/mke2fs
+BOARD_MKE2FS := device/motorola/targa/releaseutils/mke2fs
 
 # OpenGL
 BOARD_EGL_CFG := device/motorola/targa/prebuilt/egl.cfg

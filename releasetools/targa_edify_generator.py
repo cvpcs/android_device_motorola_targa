@@ -131,7 +131,7 @@ class EdifyGenerator(object):
     fstab = self.info.get("fstab", None)
     if fstab:
       p = fstab[mount_point]
-      self.script.append('run_program("/tmp/mke2fs", "-g", "8184", "-m", "0", "-O", "none,has_journal,filetype", "-L", "system", "-U", "66c79d5f-31a2-42c6-86d9-9fe0d2ec3fe5", "%s");' %
+      self.script.append('run_program("/tmp/mke2fs", "-g", "8192", "-m", "0", "-O", "none,has_journal,filetype", "-L", "system", "-U", "06836a22-bc34-1a0b-98ae-965e01a64a10", "%s");' %
                          (p.device))
       self.script.append('run_program("/tmp/tune2fs", "-c", "0", "-i", "0", "%s");' %
                          (p.device))
@@ -139,7 +139,7 @@ class EdifyGenerator(object):
     else:
       what = mount_point.lstrip("/")
       what = self.info.get("partition_path", "") + what
-      self.script.append('run_program("/tmp/mke2fs", "-g", "8184", "-m", "0", "-O", "none,has_journal,filetype", "-L", "system", "-U", "66c79d5f-31a2-42c6-86d9-9fe0d2ec3fe5", "%s");' %
+      self.script.append('run_program("/tmp/mke2fs", "-g", "8192", "-m", "0", "-O", "none,has_journal,filetype", "-L", "system", "-U", "06836a22-bc34-1a0b-98ae-965e01a64a10", "%s");' %
                          (what))
       self.script.append('run_program("/tmp/tune2fs", "-c", "0", "-i", "0", "%s");' %
                          (what))
