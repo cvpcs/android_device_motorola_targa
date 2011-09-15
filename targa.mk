@@ -153,8 +153,8 @@ PRODUCT_PACKAGES += \
     wlan_loader \
     wpa_supplicant.conf \
     dhcpcd.conf
-#    libtiOsLib \
-#    libCustomWifi \
+    libtiOsLib \
+    libCustomWifi \
 
 
 # hw libs

@@ -60,6 +60,9 @@ BOARD_USES_GENERIC_AUDIO := false
 BOARD_USES_ALSA_AUDIO := true
 BOARD_WITH_ALSA_UTILS := true
 
+# Camera
+BOARD_USES_TI_CAMERA_HAL := true
+
 BOARD_KERNEL_CMDLINE := console=/dev/null rw mem=1024M@0x80000000 vram=20M omapgpu.vram=0:4M,1:16M,2:16MT init=/init ip=off brdrev=P2B omap3_die_id androidboot.bootloader=0x0000 mmcparts=mmcblk1:p7(pds),p15(boot),p16(recovery),p17(cdrom),p18(misc),p19(cid),p20(kpanic),p21(system),p22(cache),p23(preinstall),p24(webtop),p25(userdata),p26(emstorage)
 BOARD_KERNEL_BASE := 0x10000000
 
