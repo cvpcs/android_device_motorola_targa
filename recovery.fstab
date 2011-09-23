@@ -10,4 +10,4 @@
 /pds		ext3		/dev/block/mmcblk1p7
 #/preinstall	ext3		/dev/block/mmcblk1p23
 /webtop		ext3		/dev/block/mmcblk1p24
-/emstorage	vfat		/dev/block/mmcblk1p26
+/emmc	vfat		/dev/block/mmcblk1p26
